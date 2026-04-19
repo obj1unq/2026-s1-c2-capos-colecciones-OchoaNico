@@ -1,0 +1,11 @@
+import capos.*
+import artefactos.*
+describe "Test de Rolando" {
+  test "Test capacidad maxima de artefactos" {
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(libroDeHechizos)
+      assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
+
+      assert.equals(#{espadaDelDestino, libroDeHechizos}, rolando.inventario())
+  }
+}
