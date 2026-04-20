@@ -1,3 +1,4 @@
+import hogar.*
 import capos.*
 import artefactos.*
 describe "Test de Rolando" {
@@ -8,4 +9,17 @@ describe "Test de Rolando" {
 
       assert.equals(#{espadaDelDestino, libroDeHechizos}, rolando.inventario())
   }
+
+  test "Test de almacenamiento de artefactos en hogar"{
+          rolando.encontrarArtefacto(espadaDelDestino)
+          rolando.encontrarArtefacto(libroDeHechizos)
+          rolando.asignarHogar(castilloDePiedra)
+          rolando.vueltaAHogar()
+          assert.equals(#{espadaDelDestino, libroDeHechizos}, castilloDePiedra.verAlmacenamiento())
+          rolando.encontrarArtefacto(collarDivino)
+          rolando.vueltaAHogar()
+          assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castilloDePiedra.verAlmacenamiento())
+
+  }
+
 }
