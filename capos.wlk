@@ -3,7 +3,7 @@ import hogar.*
 object rolando {
 
     var capacidadDeInventario = 2
-    var inventario = #{}
+    var inventario = []
     var hogar = null
 
     method inventario(){

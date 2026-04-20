@@ -7,7 +7,7 @@ describe "Test de Rolando" {
       rolando.encontrarArtefacto(libroDeHechizos)
       assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
 
-      assert.equals(#{espadaDelDestino, libroDeHechizos}, rolando.inventario())
+      assert.equals([espadaDelDestino, libroDeHechizos], rolando.inventario())
   }
 
   test "Test de almacenamiento de artefactos en hogar"{
@@ -15,10 +15,10 @@ describe "Test de Rolando" {
           rolando.encontrarArtefacto(libroDeHechizos)
           rolando.asignarHogar(castilloDePiedra)
           rolando.vueltaAHogar()
-          assert.equals(#{espadaDelDestino, libroDeHechizos}, castilloDePiedra.verAlmacenamiento())
+          assert.equals([espadaDelDestino, libroDeHechizos], castilloDePiedra.verAlmacenamiento())
           rolando.encontrarArtefacto(collarDivino)
           rolando.vueltaAHogar()
-          assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castilloDePiedra.verAlmacenamiento())
+          assert.equals([espadaDelDestino, libroDeHechizos, collarDivino], castilloDePiedra.verAlmacenamiento())
 
   }
 
