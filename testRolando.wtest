@@ -2,24 +2,49 @@ import hogar.*
 import capos.*
 import artefactos.*
 describe "Test de Rolando" {
-  test "Test capacidad maxima de artefactos" {
+  test "Rolando recolecta 3 artefactos cuando su maximo es 2" {
       rolando.encontrarArtefacto(espadaDelDestino)
       rolando.encontrarArtefacto(libroDeHechizos)
+      assert.equals(2, rolando.capacidadDeInventario())
       assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
 
-      assert.equals([espadaDelDestino, libroDeHechizos], rolando.inventario())
+      assert.equals(#{espadaDelDestino, libroDeHechizos}, rolando.inventario())
   }
 
-  test "Test de almacenamiento de artefactos en hogar"{
+  test "Rolando recolecta y guarda objetos en su hogar"{
           rolando.encontrarArtefacto(espadaDelDestino)
           rolando.encontrarArtefacto(libroDeHechizos)
           rolando.asignarHogar(castilloDePiedra)
           rolando.vueltaAHogar()
-          assert.equals([espadaDelDestino, libroDeHechizos], castilloDePiedra.verAlmacenamiento())
+          assert.equals(#{espadaDelDestino, libroDeHechizos}, castilloDePiedra.verAlmacenamiento())
           rolando.encontrarArtefacto(collarDivino)
           rolando.vueltaAHogar()
-          assert.equals([espadaDelDestino, libroDeHechizos, collarDivino], castilloDePiedra.verAlmacenamiento())
+          assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castilloDePiedra.verAlmacenamiento())
 
+  }
+
+  test "Rolando recolecta y guarda objetos en su hogar y luego revisa cuantos tiene"{
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.asignarHogar(castilloDePiedra)
+      rolando.vueltaAHogar()
+      assert.equals(#{espadaDelDestino, collarDivino}, castilloDePiedra.verAlmacenamiento())
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+
+      assert.equals(#{espadaDelDestino, collarDivino, armaduraDeAceroValyrio}, rolando.posesionesTotales())
+
+  }
+
+  test "Rolando recolecta objetos y los anota en su historial"{
+      rolando.asignarHogar(castilloDePiedra)
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(libroDeHechizos)
+      assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
+      rolando.vueltaAHogar()
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      rolando.encontrarArtefacto(collarDivino)
+
+      assert.equals([espadaDelDestino,libroDeHechizos, collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.verHistorial())
   }
 
 }

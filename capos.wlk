@@ -1,13 +1,31 @@
+// capos.wlk
 import hogar.*
 
 object rolando {
 
     var capacidadDeInventario = 2
-    var inventario = []
+    const inventario = #{}
+    const historialDeEncuentros = []
     var hogar = null
+    var poder = 5
 
     method inventario(){
         return inventario
+    }
+
+    method verHistorial(){
+        return historialDeEncuentros
+    }
+
+    method posesionesTotales(){
+        const todosSusArtefactos = #{}
+        inventario.forEach({objeto => todosSusArtefactos.add(objeto)})
+        hogar.verAlmacenamiento().forEach({objeto => todosSusArtefactos.add(objeto)})
+        return todosSusArtefactos
+    }
+
+    method poseeElArtefacto(artefacto) {
+        inventario.any({objeto => objeto == artefacto})
     }
 
     method asignarHogar(nuevoHogar){
@@ -20,6 +38,7 @@ object rolando {
     }
 
     method encontrarArtefacto(artefacto){
+        historialDeEncuentros.add(artefacto)
         self.validarTomaDeArtefacto()
         self.tomarArtefacto(artefacto)
     }
@@ -40,6 +59,10 @@ object rolando {
 
     method cambiarTamañoDeInventario(tamaño){
         capacidadDeInventario = tamaño
+    }
+
+    method capacidadDeInventario() {
+        return capacidadDeInventario
     }
 
 }

@@ -1,6 +1,6 @@
 object castilloDePiedra {
 
-    var objetosAlmacenados = []
+    const objetosAlmacenados = #{}
 
     method almacenarArtefacto(artefacto) {
         objetosAlmacenados.add(artefacto)
