@@ -6,7 +6,7 @@ object rolando {
     var capacidadDeInventario = 2
     const inventario = #{}
     const historialDeEncuentros = []
-    var hogar = null
+    var hogar = castilloDePiedra
     var poder = 5
 
     method inventario(){
@@ -18,10 +18,7 @@ object rolando {
     }
 
     method posesionesTotales(){
-        const todosSusArtefactos = #{}
-        inventario.forEach({objeto => todosSusArtefactos.add(objeto)})
-        hogar.verAlmacenamiento().forEach({objeto => todosSusArtefactos.add(objeto)})
-        return todosSusArtefactos
+        return self.inventario().union(hogar.verAlmacenamiento())
     }
 
     method poseeElArtefacto(artefacto) {
@@ -32,7 +29,7 @@ object rolando {
         hogar = nuevoHogar
     }
 
-        method vueltaAHogar(){
+    method vueltaAHogar(){
         self.inventario().forEach({objeto => hogar.almacenarArtefacto(objeto) })
         self.inventario().clear()
     }
