@@ -1,15 +1,3 @@
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
-// testRolando.wtest
 import hogar.*
 import capos.*
 import artefactos.*
@@ -121,6 +109,30 @@ describe "Test de Rolando" {
         assert.equals(19, rolando.poderDePelea())
         assert.equals(#{archibaldo, astra}, rolando.enemigosQuePuedeVencer())
         assert.equals(#{palacioDeMarmol, torreDeMarfil}, rolando.moradasConquistables())
+  }
+
+  test "Rolando es mas poderoso que todos sus enemigos"{
+        rolando.cambiarTamañoDeInventario(3)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+        assert.equals(19, rolando.poderDePelea())
+        assert.notThat(rolando.esPoderoso())
+        rolando.poderBase(10)
+        assert.equals(29, rolando.poderDePelea())
+        assert.that(rolando.esPoderoso())
+  }
+
+  test "Rolando usa artefacto fatal contra Astra y luego no tiene artefacto fatal contra Caterina"{
+      rolando.cambiarTamañoDeInventario(3)
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.poderBase(15)
+
+      assert.equals(espadaDelDestino ,rolando.encontraArtefactoFatalContra(astra))
+      rolando.lucharBatalla()
+      assert.notThat(rolando.tieneArtefactoFatalContra(caterina))
   }
 
 }

@@ -1,10 +1,3 @@
-// capos.wlk
-// capos.wlk
-// capos.wlk
-// capos.wlk
-// capos.wlk
-// capos.wlk
-// capos.wlk
 import hogar.*
 
 object rolando {
@@ -15,6 +8,23 @@ object rolando {
     var hogar = castilloDePiedra
     var poderBase = 5
     const enemigos = #{archibaldo,astra,caterina}
+
+
+    method poderBase(_poderBase) {
+        poderBase = _poderBase
+    }
+
+    method tieneArtefactoFatalContra(enemigo){
+        return inventario.any({objeto=> objeto.poderAlSerUsadoPor(self) > enemigo.poderDePelea()})
+    }
+
+    method encontraArtefactoFatalContra(enemigo) {
+        return inventario.filter({objeto=> objeto.poderAlSerUsadoPor(self) > enemigo.poderDePelea()}).anyOne()
+    }
+
+    method esPoderoso() {
+        return enemigos.all({enemigo => self.puedeVencerA(enemigo)})
+    }
 
     method enemigosQuePuedeVencer() {
         return enemigos.filter({enemigo=> self.puedeVencerA(enemigo)})
