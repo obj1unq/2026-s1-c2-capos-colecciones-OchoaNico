@@ -1,3 +1,15 @@
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
+// testRolando.wtest
 import hogar.*
 import capos.*
 import artefactos.*
@@ -23,7 +35,7 @@ describe "Test de Rolando" {
 
   }
 
-  test "Rolando recolecta y guarda objetos en su hogar y luego revisa cuantos tiene"{
+  test "Rolando recolecta y guarda objetos en su hogar y luego revisa cuantos tiene en total"{
       rolando.encontrarArtefacto(espadaDelDestino)
       rolando.encontrarArtefacto(collarDivino)
       rolando.asignarHogar(castilloDePiedra)
@@ -45,6 +57,70 @@ describe "Test de Rolando" {
       rolando.encontrarArtefacto(collarDivino)
 
       assert.equals([espadaDelDestino,libroDeHechizos, collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.verHistorial())
+  }
+
+  test "Rolando usa artefactos entre batallas"{
+        rolando.cambiarTamañoDeInventario(3)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+        assert.equals(5, rolando.poderBase())
+        assert.equals(5, espadaDelDestino.poderAlSerUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderAlSerUsadoPor(rolando))
+        assert.equals(3, collarDivino.poderAlSerUsadoPor(rolando))
+
+        rolando.lucharBatalla()
+        assert.equals(6, rolando.poderBase())
+        assert.equals(3, espadaDelDestino.poderAlSerUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderAlSerUsadoPor(rolando))
+        assert.equals(3, collarDivino.poderAlSerUsadoPor(rolando))     
+
+        rolando.lucharBatalla()
+        assert.equals(7, rolando.poderBase())
+        assert.equals(3.5, espadaDelDestino.poderAlSerUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderAlSerUsadoPor(rolando))
+        assert.equals(5, collarDivino.poderAlSerUsadoPor(rolando)) 
+
+        rolando.lucharBatalla()
+        assert.equals(8, rolando.poderBase())
+        assert.equals(4, espadaDelDestino.poderAlSerUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderAlSerUsadoPor(rolando))
+        assert.equals(6, collarDivino.poderAlSerUsadoPor(rolando)) 
+  }
+
+  test "Rolando poder de pelea con espada, armadura y collar"{
+        rolando.cambiarTamañoDeInventario(3)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+
+        assert.equals(19, rolando.poderDePelea())
+  }
+  test "Rolando poder de pelea con libro y espada,armadura y collar en hogar (sin uso)"{
+        rolando.cambiarTamañoDeInventario(3)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+        rolando.vueltaAHogar()
+        rolando.encontrarArtefacto(libroDeHechizos)
+
+        assert.equals(4, libroDeHechizos.poderAlSerUsadoPor(rolando))
+        rolando.lucharBatalla()
+        assert.equals(6, libroDeHechizos.poderAlSerUsadoPor(rolando))
+        rolando.lucharBatalla()
+        assert.equals(7, libroDeHechizos.poderAlSerUsadoPor(rolando))
+        rolando.lucharBatalla()
+        assert.equals(0, libroDeHechizos.poderAlSerUsadoPor(rolando))
+  }
+
+  test "Enemigos que Rolando puede vencer y moradas conquistables"{
+        rolando.cambiarTamañoDeInventario(3)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+        assert.equals(19, rolando.poderDePelea())
+        assert.equals(#{archibaldo, astra}, rolando.enemigosQuePuedeVencer())
+        assert.equals(#{palacioDeMarmol, torreDeMarfil}, rolando.moradasConquistables())
   }
 
 }
