@@ -14,7 +14,6 @@ describe "Test de Rolando" {
   test "Rolando recolecta y guarda objetos en su hogar"{
           rolando.encontrarArtefacto(espadaDelDestino)
           rolando.encontrarArtefacto(libroDeHechizos)
-          rolando.asignarHogar(castilloDePiedra)
           rolando.vueltaAHogar()
           assert.equals(#{espadaDelDestino, libroDeHechizos}, castilloDePiedra.verAlmacenamiento())
           rolando.encontrarArtefacto(collarDivino)
@@ -26,7 +25,6 @@ describe "Test de Rolando" {
   test "Rolando recolecta y guarda objetos en su hogar y luego revisa cuantos tiene en total"{
       rolando.encontrarArtefacto(espadaDelDestino)
       rolando.encontrarArtefacto(collarDivino)
-      rolando.asignarHogar(castilloDePiedra)
       rolando.vueltaAHogar()
       assert.equals(#{espadaDelDestino, collarDivino}, castilloDePiedra.verAlmacenamiento())
       rolando.encontrarArtefacto(armaduraDeAceroValyrio)
@@ -36,7 +34,6 @@ describe "Test de Rolando" {
   }
 
   test "Rolando recolecta objetos y los anota en su historial"{
-      rolando.asignarHogar(castilloDePiedra)
       rolando.encontrarArtefacto(espadaDelDestino)
       rolando.encontrarArtefacto(libroDeHechizos)
       assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
@@ -44,11 +41,11 @@ describe "Test de Rolando" {
       rolando.encontrarArtefacto(armaduraDeAceroValyrio)
       rolando.encontrarArtefacto(collarDivino)
 
-      assert.equals([espadaDelDestino,libroDeHechizos, collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.verHistorial())
+      assert.equals([espadaDelDestino,libroDeHechizos, collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.historialDeEncuentros())
   }
 
   test "Rolando usa artefactos entre batallas"{
-        rolando.cambiarTamañoDeInventario(3)
+        rolando.capacidadDeInventario(3)
         rolando.encontrarArtefacto(espadaDelDestino)
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
@@ -77,7 +74,7 @@ describe "Test de Rolando" {
   }
 
   test "Rolando poder de pelea con espada, armadura y collar"{
-        rolando.cambiarTamañoDeInventario(3)
+        rolando.capacidadDeInventario(3)
         rolando.encontrarArtefacto(espadaDelDestino)
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
@@ -85,7 +82,7 @@ describe "Test de Rolando" {
         assert.equals(19, rolando.poderDePelea())
   }
   test "Rolando poder de pelea con libro y espada,armadura y collar en hogar (sin uso)"{
-        rolando.cambiarTamañoDeInventario(3)
+        rolando.capacidadDeInventario(3)
         rolando.encontrarArtefacto(espadaDelDestino)
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
@@ -102,7 +99,7 @@ describe "Test de Rolando" {
   }
 
   test "Enemigos que Rolando puede vencer y moradas conquistables"{
-        rolando.cambiarTamañoDeInventario(3)
+        rolando.capacidadDeInventario(3)
         rolando.encontrarArtefacto(espadaDelDestino)
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
@@ -112,7 +109,7 @@ describe "Test de Rolando" {
   }
 
   test "Rolando es mas poderoso que todos sus enemigos"{
-        rolando.cambiarTamañoDeInventario(3)
+        rolando.capacidadDeInventario(3)
         rolando.encontrarArtefacto(espadaDelDestino)
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
@@ -124,7 +121,7 @@ describe "Test de Rolando" {
   }
 
   test "Rolando usa artefacto fatal contra Astra y luego no tiene artefacto fatal contra Caterina"{
-      rolando.cambiarTamañoDeInventario(3)
+      rolando.capacidadDeInventario(3)
       rolando.encontrarArtefacto(espadaDelDestino)
       rolando.encontrarArtefacto(armaduraDeAceroValyrio)
       rolando.encontrarArtefacto(collarDivino)

@@ -1,7 +1,9 @@
 object bendicion {
     
+    const poder = 4
+
     method usarHechizoEn(personaje){
-        return 4
+        return poder
     }
 
 }

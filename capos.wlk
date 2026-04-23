@@ -5,7 +5,7 @@ object rolando {
     var capacidadDeInventario = 2
     const inventario = #{}
     const historialDeEncuentros = []
-    var hogar = castilloDePiedra
+    const hogar = castilloDePiedra
     var poderBase = 5
     const enemigos = #{archibaldo,astra,caterina}
 
@@ -63,7 +63,7 @@ object rolando {
         return inventario
     }
 
-    method verHistorial(){
+    method historialDeEncuentros(){
         return historialDeEncuentros
     }
 
@@ -75,9 +75,6 @@ object rolando {
         self.posesionesTotales().any({objeto => objeto == artefacto})
     }
 
-    method asignarHogar(nuevoHogar){
-        hogar = nuevoHogar
-    }
 
     method vueltaAHogar(){
         hogar.almacenarArtefactos(self.inventario())
@@ -104,8 +101,8 @@ object rolando {
         inventario.add(artefacto)
     }
 
-    method cambiarTamañoDeInventario(tamaño){
-        capacidadDeInventario = tamaño
+    method capacidadDeInventario(_capacidadDeInventario){
+        capacidadDeInventario = _capacidadDeInventario
     }
 
     method capacidadDeInventario() {
@@ -115,11 +112,11 @@ object rolando {
 }
 
 object caterina {
-    const poderBase = 28
+    const poderDePelea = 28
     const hogar = fortalezaDeAcero
 
     method poderDePelea(){
-        return poderBase
+        return poderDePelea
     }
 
     method hogar() {
@@ -128,11 +125,11 @@ object caterina {
 }
 
 object archibaldo {
-    const poderBase = 16
+    const poderDePelea = 16
     const hogar = palacioDeMarmol
 
     method poderDePelea(){
-        return poderBase
+        return poderDePelea
     }
 
     method hogar() {
@@ -141,11 +138,11 @@ object archibaldo {
 }
 
 object astra {
-    const poderBase = 14
+    const poderDePelea = 14
     const hogar = torreDeMarfil
 
     method poderDePelea(){
-        return poderBase
+        return poderDePelea
     }
 
     method hogar() {
