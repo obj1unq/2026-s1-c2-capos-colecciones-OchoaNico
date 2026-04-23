@@ -131,7 +131,6 @@ describe "Test de Rolando" {
       rolando.poderBase(15)
 
       assert.equals(espadaDelDestino ,rolando.encontraArtefactoFatalContra(astra))
-      rolando.lucharBatalla()
       assert.notThat(rolando.tieneArtefactoFatalContra(caterina))
   }
 
